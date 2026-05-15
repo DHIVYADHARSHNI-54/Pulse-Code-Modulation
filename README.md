@@ -15,13 +15,18 @@ L = 16
 step = (msg.max()-msg.min())/L
 pcm = np.round(msg/step)*step
 pcm_demod = pcm  # Ideal reconstruction
+```
+
+
+# Program:
+```
 delta = 0.05
 dm = [0]
 steps = []
 for s in msg:
-    step = delta if s > dm[-1] else -delta
-    steps.append(step)
-    dm.append(dm[-1] + step)
+step = delta if s > dm[-1] else -delta
+steps.append(step)
+dm.append(dm[-1] + step)
 dm_demod = np.cumsum([0] + steps)
 plt.figure(figsize=(10,10))
 plt.subplot(611); plt.plot(t,msg); plt.title("Analog Signal"); plt.grid()
